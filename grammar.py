@@ -88,6 +88,7 @@ def __generate_approach_tone(lastChord):
 def __generate_arbitrary_tone(lastChord):
     return __generate_scale_tone(lastChord) # fix later, make random note.
 
+
 def parse_melody(fullMeasureNotes, fullMeasureChords):
     # Remove extraneous elements.x
     measure = copy.deepcopy(fullMeasureNotes)
@@ -160,7 +161,12 @@ def parse_melody(fullMeasureNotes, fullMeasureChords):
                 noteDistLower = interval.subtract([noteDist, "m3"])
                 intervalInfo = ",<%s,%s>" % (noteDistUpper.directedName, 
                     noteDistLower.directedName)
-
+                # print "Upper, lower: %s, %s" % (noteDistUpper,
+                #     noteDistLower)
+                # print "Upper, lower dnames: %s, %s" % (
+                #     noteDistUpper.directedName,
+                #     noteDistLower.directedName)
+                # print "The interval: %s" % (intervalInfo)
                 prevNote = nr
 
         # Return. Do lazy evaluation for real-time performance.
@@ -240,7 +246,7 @@ def unparse_grammar(m1_grammar, m1_chords):
             
             if terms[0] == 'C':
                 relevantChordTones = []
-                for i in xrange(0, numNotes):
+                for i in range(0, numNotes):
                     currNote = note.Note(lowPitch.transpose(i).simplifyEnharmonic())
                     if __is_chord_tone(lastChord, currNote):
                         relevantChordTones.append(currNote)
@@ -259,7 +265,7 @@ def unparse_grammar(m1_grammar, m1_chords):
             # Case S: scale note, must be within increment.
             elif terms[0] == 'S':
                 relevantScaleTones = []
-                for i in xrange(0, numNotes):
+                for i in range(0, numNotes):
                     currNote = note.Note(lowPitch.transpose(i).simplifyEnharmonic())
                     if __is_scale_tone(lastChord, currNote):
                         relevantScaleTones.append(currNote)
@@ -279,7 +285,7 @@ def unparse_grammar(m1_grammar, m1_chords):
             # For now: handle both A and X cases.
             else:
                 relevantApproachTones = []
-                for i in xrange(0, numNotes):
+                for i in range(0, numNotes):
                     currNote = note.Note(lowPitch.transpose(i).simplifyEnharmonic())
                     if __is_approach_tone(lastChord, currNote):
                         relevantApproachTones.append(currNote)
