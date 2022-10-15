@@ -1,5 +1,5 @@
 '''
-User:     Yunfan Long
+Adapter:     Yunfan Long
 Project:    DL4Jazz
 Purpose:    Parse, cleanup and process data.
 
