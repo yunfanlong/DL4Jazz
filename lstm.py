@@ -69,6 +69,39 @@ def lstm(input_dim, timesteps):
     model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
     return model
 
+def bi_lstm(input_dim, timesteps):
+    # build a stacked Bi-LSTM
+    model = Sequential() #1
+    model.add(Bidirectional(LSTM(128, return_sequences=True, input_shape=(timesteps, input_dim))))
+    model.add(Dropout(0.2))
+    #2
+    model.add(Bidirectional(LSTM(610, return_sequences=True)))
+    model.add(Dropout(0.2))
+    #3
+    model.add(Bidirectional(LSTM(610, return_sequences=True)))
+    model.add(Dropout(0.2))
+    #4
+    model.add(Bidirectional(LSTM(610, return_sequences=True)))
+    model.add(Dropout(0.2))
+    #4
+    model.add(Bidirectional(LSTM(610, return_sequences=True)))
+    model.add(Dropout(0.2))
+    #5
+    model.add(Bidirectional(LSTM(610, return_sequences=True)))
+    model.add(Dropout(0.2))
+    #6
+    model.add(Bidirectional(LSTM(610, return_sequences=True)))
+    model.add(Dropout(0.2))
+    #7
+    model.add(Bidirectional(LSTM(128, return_sequences=False)))
+    model.add(Dropout(0.2))
+
+    model.add(Dense(input_dim, kernel_regularizer=l1(1e-3)))
+    model.add(Activation('softmax'))
+
+    model.compile(loss='categorical_crossentropy', optimizer='adam', )
+    return model
+
 def lstm_vae(input_dim, timesteps, batch_size, intermediate_dim, latent_dim, epsilon_std=1.):
 
     x = Input(shape=(timesteps, input_dim,))
