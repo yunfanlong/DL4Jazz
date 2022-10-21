@@ -1,10 +1,10 @@
 '''
 Adapter:     Yunfan Long
 Project:    DL4Jazz
-Purpose:    Parse, cleanup and process data.
+Purpose:    Extract, manipulate, process musical grammar
 
 Orig. Author:      Evan Chow
-Project:    jazzml
+Orig. Project:    jazzml
 
 Directly taken then cleaned up from Evan Chow's jazzml, 
 https://github.com/evancchow/jazzml, with permission.

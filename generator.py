@@ -1,12 +1,14 @@
 '''
-Some code adapted from Evan Chow's jazzml, https://github.com/evancchow/jazzml 
-with express permission.
+Adapter:     Yunfan Long
+Project:    DL4Jazz
+Purpose: Generate jazz using the LSTM models
+
+Part of code adapted from Ji-Sung Kim's deepjazz,
+https://github.com/jisungk/deepjazz, with permission.
 
 Code was adapted while significantly referencing public examples from the
 Keras documentation on GitHub:
 https://github.com/fchollet/keras/blob/master/examples/lstm_text_generation.py
-
-Purpose: Generate jazz using the LSTM models.
 '''
 
 from __future__ import print_function
