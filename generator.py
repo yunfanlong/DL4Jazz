@@ -19,9 +19,9 @@ import os
 
 import numpy as np
 from music21 import *
-from grammar import *
-from preprocess import *
-from qa import *
+from utils.grammar import *
+from utils.preprocess import *
+from utils.qa import *
 
 import lstm
 
@@ -98,11 +98,12 @@ def __generate_grammar(model, corpus, abstract_grammars, values, val_indices,
 #----------------------------PUBLIC FUNCTIONS----------------------------------#
 ''' Generates musical sequence based on the given data filename and settings.
     Plays then stores (MIDI file) the generated output. '''
-def generate(data_fn, out_fn, N_epochs, model_choice):
+def generate(data_fn, out_fn, N_epochs, diversity, model_choice):
     # model settings
     max_len = 20
     max_tries = 1000
-    diversity = 0.5
+    # diversity = 0.5 # 0.5
+
 
     # musical settings
     bpm = 130
@@ -186,6 +187,8 @@ def parse_arguments():
                         default='lstm', help="Model choice: lstm / bi-lstm / vae-lstm")
     parser.add_argument('--epochs', dest='N_epochs', type=int,
                         default=128, help="Number of epochs")
+    parser.add_argument('--diversity', dest='diversity', type=float,
+                        default=0.5, help="Diversity / Temperature")
     return parser.parse_args()
 
 
@@ -194,12 +197,12 @@ if __name__ == '__main__':
     args = parse_arguments()
     N_epochs = args.N_epochs
     model_choice = args.model_choice
+    diversity = args.diversity
 
     # i/o settings
-    # data_fn = 'midi/' + 'original_metheny.mid' # 'And Then I Knew' by Pat Metheny 
-    data_fn = 'midi/' + 'piano.mid'
-    out_fn = 'midi/' 'deepjazz_on_metheny...' + str(N_epochs)
+    data_fn = 'data/' + 'original_metheny.mid' 
+    out_fn = 'result/' + str(model_choice) + '_' +  str(N_epochs)
     if (N_epochs == 1): out_fn += '_epoch.midi'
     else:               out_fn += '_epochs.midi'
 
-    generate(data_fn, out_fn, N_epochs, model_choice=model_choice)
+    generate(data_fn, out_fn, N_epochs, diversity, model_choice=model_choice)
