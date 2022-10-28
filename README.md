@@ -36,7 +36,7 @@ python generator.py --model-choice "bi-lstm" --epochs 5 --diversity 0.8
 ## Model Architechture
 
 ### Bi-LSTM
-![VAE-LSTM Architecture](image\Bidirectional-LSTM.jpg)
+![VAE-LSTM Architecture](image/Bidirectional-LSTM.jpg)
 - **Input Layer**
 - **Bi-LSTM Layer 1**
   - LSTM Forward 1
@@ -56,7 +56,7 @@ python generator.py --model-choice "bi-lstm" --epochs 5 --diversity 0.8
   - Softmax
 
 ### VAE-LSTM
-![VAE-LSTM Architecture](image\vae-lstm-arch.png)
+![VAE-LSTM Architecture](image/vae-lstm-arch.png)
 - **Input Layer**
 - **LSTM Layer 1 (Split)**
   - LSTM Forward 1
