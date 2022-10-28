@@ -40,7 +40,6 @@ def build_model(corpus, val_indices, max_len, N_epochs=128, model_choice=None):
     
     
     if model_choice=='lstm':
-        # build a 2 stacked LSTM
         # default
         model = lstm(input_dim=N_values, timesteps=max_len)
         plot_model(model, to_file='lstm.png')
@@ -68,7 +67,6 @@ def build_model(corpus, val_indices, max_len, N_epochs=128, model_choice=None):
 
 
 def lstm(input_dim, timesteps):
-    # build a 2 stacked LSTM
     # default
     model = Sequential()
     model.add(LSTM(128, return_sequences=True, input_shape=(timesteps, input_dim)))
@@ -82,7 +80,6 @@ def lstm(input_dim, timesteps):
     return model
 
 def bi_lstm(input_dim, timesteps):
-    # build a stacked Bi-LSTM
     model = Sequential() #1
     model.add(Bidirectional(LSTM(128, return_sequences=True, input_shape=(timesteps, input_dim))))
     model.add(Dropout(0.2))
@@ -117,21 +114,6 @@ def bi_lstm(input_dim, timesteps):
     
 
 def vae_lstm(input_dim, timesteps, batch_size, intermediate_dim, latent_dim, epsilon_std=1.):
-
-    """
-    Creates an LSTM Variational Autoencoder (VAE). Returns VAE, Encoder, Generator. 
-    # Arguments
-        input_dim: int.
-        timesteps: int, input timestep dimension.
-        batch_size: int.
-        intermediate_dim: int, output shape of LSTM. 
-        latent_dim: int, latent z-layer shape. 
-        epsilon_std: float, z-layer sigma.
-    # References
-        - [Building Autoencoders in Keras](https://blog.keras.io/building-autoencoders-in-keras.html)
-        - [Generating sentences from a continuous space](https://arxiv.org/abs/1511.06349)
-    """
-
     x = Input(shape=(timesteps, input_dim, ))
 
     # LSTM encoding
